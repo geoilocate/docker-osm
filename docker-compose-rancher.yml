@@ -122,21 +122,6 @@ services:
       - TIME=120
     command: bash -c "while [ ! -f /home/settings/country.pbf ] ; do sleep 1; done && python3 -u /home/download.py"
 
-  pgadmin4:
-    image: dpage/pgadmin4:4.16
-    hostname: pgadmin4
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=docker@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=docker
-    ports:
-      - 6500:80
-    restart: on-failure
-    depends_on:
-      db:
-        condition: service_healthy
-
   osmenrich:
     build: docker-osmenrich
     container_name: dockerosm_osmenrich
